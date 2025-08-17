@@ -7,11 +7,21 @@ import {
   Preload,
   useTexture,
 } from "@react-three/drei";
+import { useEffect } from "react";
 
 import CanvasLoader from "../Loader";
 
 const Ball = (props) => {
   const [decal] = useTexture([props.imgUrl]);
+
+  useEffect(() => {
+  if (!decal?.image) {
+    console.error("❌ Texture failed to load:", props.imgUrl);
+  } else {
+    console.log("✅ Texture loaded successfully:", props.imgUrl);
+  }
+}, [decal]);
+
 
   return (
     <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
